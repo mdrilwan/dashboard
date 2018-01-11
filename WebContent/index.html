@@ -23,47 +23,57 @@
 </style>
 </head>
 <body>
-	<div class="ui sidebar visible vertical menu styled fixed">
-		<div class="item">
-			<div onclick="home()" class="ui grid">
-				<div class="two wide column">
-					<img src="images/home.png" width="15" height="15"></img>
+	<div class="ui bottom attached segment pushable">
+		<div class="ui sidebar visible vertical menu styled fixed">
+			<div class="item">
+				<div onclick="home()">Home</div>
+			</div>
+			<div class="item">
+				<div class="ui accordion">
+					<div class="title">Dashboards</div>
+					<div class="content">
+						<div>
+							<div onclick="loadTraffic()" class="ui grid">
+								<div class="two wide column">
+									<img src="images/traffic.png" width="15" height="15"></img>
+								</div>
+								<div class="ten wide column">Traffic Based</div>
+							</div>
+							<div onclick="loadPerformance()" class="ui grid">
+								<div class="two wide column">
+									<img src="images/performance.png" width="15" height="15"></img>
+								</div>
+								<div class="ten wide column">Performance Based</div>
+							</div>
+							<div onclick="loadError()" class="ui grid">
+								<div class="two wide column">
+									<img src="images/error.png" width="15" height="15"></img>
+								</div>
+								<div class="ten wide column">Error Based</div>
+							</div>
+							<div onclick="loadURL()" class="ui grid">
+								<div class="two wide column">
+									<img src="images/url.png" width="15" height="15"></img>
+								</div>
+								<div class="ten wide column">URL Based</div>
+							</div>
+							<div onclick="loadLocation()" class="ui grid">
+								<div class="two wide column">
+									<img src="images/location.png" width="15" height="15"></img>
+								</div>
+								<div class="ten wide column">Location Based</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="ten wide column">Home</div>
 			</div>
 		</div>
-		<div class="item">
-			<div onclick="loadTraffic()" class="ui grid">
-				<div class="two wide column">
-					<img src="images/traffic.png" width="15" height="15"></img>
-				</div>
-				<div class="ten wide column">Traffic Based</div>
+		<div class="pusher">
+			<div class="ui container">
+				<div class="ui breadcrumb" id="breadcrumb"></div>
+				<div class="ui clearing divider"></div>
+				<div style="width: 100%;" id="main"></div>
 			</div>
-		</div>
-		<div class="item">
-			<div onclick="loadPerformance()" class="ui grid">
-				<div class="two wide column">
-					<img src="images/performance.png" width="15" height="15"></img>
-				</div>
-				<div class="ten wide column">Performance Based</div>
-			</div>
-		</div>
-		<div class="item">
-			<div onclick="loadError()" class="ui grid">
-				<div class="two wide column">
-					<img src="images/error.png" width="15" height="15"></img>
-				</div>
-				<div class="ten wide column">Error Based</div>
-			</div>
-		</div>
-	</div>
-	<div class="pusher">
-		<div class="ui container">
-			<div class="ui breadcrumb" id="breadcrumb">
-				<!-- <a class="section" id="home" onclick="home()">Home</a> -->
-			</div>
-			<div class="ui clearing divider"></div>
-			<div style="width: 100%;" id="main"></div>
 		</div>
 	</div>
 </body>

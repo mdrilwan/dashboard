@@ -1,22 +1,37 @@
 <html>
 <body>
 	<div id="home">
-		<div class="row" style="height: 35%;">
+		<div class="row">
 			<div class="ui grid">
 				<div class="two wide column"></div>
-				<div class="two wide column" onclick="loadTraffic()">
+				<div class="three wide column" onclick="loadTraffic()">
 					<img src="images/traffic.png" width="100"></img>
-					<h3 align="center">Traffic Based</h3>
+					<h3>Traffic Based</h3>
 				</div>
-				<div class="three wide column"></div>
-				<div class="two wide column" onclick="loadPerformance()">
+				<div class="two wide column"></div>
+				<div class="three wide column" onclick="loadPerformance()">
 					<img src="images/performance.png" width="100"></img>
-					<h3 align="center">Performance Based</h3>
+					<h3>Performance Based</h3>
 				</div>
-				<div class="three wide column"></div>
-				<div class="two wide column" onclick="loadError()">
+				<div class="two wide column"></div>
+				<div class="three wide column" onclick="loadError()">
 					<img src="images/error.png" width="100"></img>
-					<h3 align="center">Error Based</h3>
+					<h3>Error Based</h3>
+				</div>
+			</div>
+		</div>
+		<div class="ui hidden divider" style="height: 10%;"></div>
+		<div class="row">
+			<div class="ui grid">
+				<div class="two wide column"></div>
+				<div class="three wide column" onclick="loadURL()">
+					<img src="images/url.png" width="100"></img>
+					<h3>URL Based</h3>
+				</div>
+				<div class="two wide column"></div>
+				<div class="three wide column" onclick="loadLocation()">
+					<img src="images/location.png" width="100"></img>
+					<h3>Location Based</h3>
 				</div>
 			</div>
 		</div>
