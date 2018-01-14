@@ -18,8 +18,8 @@ import javax.websocket.server.ServerEndpoint;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 
-@ServerEndpoint("/stream")
-public class Server {
+@ServerEndpoint("/tansactionsStream")
+public class TranactionsBased {
 
 	private static final Set<Session> sessionList = Collections.synchronizedSet(new HashSet<Session>());
 	private Session session;
@@ -54,57 +54,18 @@ public class Server {
 
 		public void run() {
 			try {
-				if (chart.equals("line")) {
-					msg.put("x", System.currentTimeMillis());
-					msg.put("y", Math.round(Math.random() * 100));
+				if (chart.equals("bar")) {
+					msg = new JSONObject();
+					msg.put("value", String.valueOf((Math.round(Math.random() * 100) / 1)));
 
 					session.getBasicRemote().sendText(msg.toString());
-
-				} else if (chart.equals("pie")) {
-					msgToSend.clear();
-
+				} else if (chart.equals("total")) {
+					session.getBasicRemote().sendText(String.valueOf(Math.round((Math.random() * 100))));
+				} else if (chart.equals("gauge")) {
 					msg = new JSONObject();
-					msg.put("assetInstName", "CustomerOrderFeasibility_1.0");
-					msg.put("count", String.valueOf((Math.round(Math.random() * 100) / 1)));
-					msgToSend.add(msg);
+					msg.put("value", String.valueOf((Math.round(Math.random() * 10) / 1)));
 
-					msg = new JSONObject();
-					msg.put("assetInstName", "CustomerOrderFeasibility_V2_2.0");
-					msg.put("count", String.valueOf((Math.round(Math.random() * 100) / 1)));
-					msgToSend.add(msg);
-
-					session.getBasicRemote().sendText(msgToSend.toString());
-
-				} else if (chart.equals("bar")) {
-					msgToSend.clear();
-
-					msg = new JSONObject();
-					msg.put("label", "Group A");
-					msg.put("value", String.valueOf((Math.round(Math.random() * 100) / 1)));
-					msgToSend.add(msg);
-
-					msg = new JSONObject();
-					msg.put("label", "Group B");
-					msg.put("value", String.valueOf((Math.round(Math.random() * 100) / 1)));
-					msgToSend.add(msg);
-
-					msg = new JSONObject();
-					msg.put("label", "Group C");
-					msg.put("value", String.valueOf((Math.round(Math.random() * 100) / 1)));
-					msgToSend.add(msg);
-
-					msg = new JSONObject();
-					msg.put("label", "Group D");
-					msg.put("value", String.valueOf((Math.round(Math.random() * 100) / 1)));
-					msgToSend.add(msg);
-
-					msg = new JSONObject();
-					msg.put("label", "Group E");
-					msg.put("value", String.valueOf((Math.round(Math.random() * 100) / 1)));
-					msgToSend.add(msg);
-
-					session.getBasicRemote().sendText(msgToSend.toString());
-
+					session.getBasicRemote().sendText(msg.toString());
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
