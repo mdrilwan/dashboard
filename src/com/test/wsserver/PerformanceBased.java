@@ -18,8 +18,8 @@ import javax.websocket.server.ServerEndpoint;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 
-@ServerEndpoint("/tansactionsStream")
-public class TranactionsBased {
+@ServerEndpoint("/performanceStream")
+public class PerformanceBased {
 
 	private static final Set<Session> sessionList = Collections.synchronizedSet(new HashSet<Session>());
 	private Session session;
@@ -53,27 +53,32 @@ public class TranactionsBased {
 
 		public void run() {
 			try {
-				if (chart.equals("bar")) {
-					msg = new JSONObject();
-					msg.put("value", String.valueOf((Math.round(Math.random() * 100) / 1)));
+				if (chart.equals("horizontalbar")) {
+					JSONArray tmp = new JSONArray();
 
-					session.getBasicRemote().sendText(msg.toString());
-				} else if (chart.equals("total")) {
+					for (int i = 1; i <= 10; i++) {
+						msg = new JSONObject();
+						msg.put("x", "data" + i);
+						msg.put("value", String.valueOf((Math.round(Math.random() * 100) / 1)));
+						tmp.add(msg);
+					}
+
+					session.getBasicRemote().sendText(tmp.toString());
+				} else if (chart.equals("avg")) {
 					session.getBasicRemote().sendText(String.valueOf(Math.round((Math.random() * 100))));
-				} else if (chart.equals("gauge")) {
+				} else if (chart.equals("donut")) {
 					msg = new JSONObject();
 					msg.put("value", String.valueOf((Math.round(Math.random() * 10) / 1)));
-
-					session.getBasicRemote().sendText(msg.toString());
-				} else if (chart.equals("line")) {
-					msg = new JSONObject();
-					msg.put("y", String.valueOf((Math.round(Math.random() * 10) / 1)));
 					JSONObject tmp = new JSONObject();
-					tmp.put("success", msg);
+					tmp.put("less", msg);
 
 					msg = new JSONObject();
-					msg.put("y", String.valueOf((Math.round(Math.random() * 10) / 1)));
-					tmp.put("failure", msg);
+					msg.put("value", String.valueOf((Math.round(Math.random() * 10) / 1)));
+					tmp.put("between", msg);
+
+					msg = new JSONObject();
+					msg.put("value", String.valueOf((Math.round(Math.random() * 10) / 1)));
+					tmp.put("more", msg);
 
 					session.getBasicRemote().sendText(tmp.toString());
 				}

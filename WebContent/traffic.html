@@ -3,45 +3,47 @@
 <script src="js/traffic.js"></script>
 </head>
 <body>
-	<div id="traffic" class="ui container" style="width: 100%">
-		<div id="buttonElement" style="margin-right: 40px; margin-left: 20px;">
-			<div align="right">
-				<select class="ui dropdown" style="background-color: #ffffff;">
-					<option value="">Live Data</option>
-					<option value="">Last 24 Hours</option>
-					<option value="">Last 7 Days</option>
-					<option value="">Last 30 Days</option>
-					<option value="">Last 12 Months</option>
-				</select>
+	<div id="traffic" class="ui container" style="width: 100%;">
+		<div id="buttonElement" align="center">
+			<div class="ui basic buttons" style="background-color: #ffffff;">
+				<div class="ui button">Minute</div>
+				<div class="ui button">Hour</div>
+				<div class="ui button">Day</div>
+				<div class="ui button">Month</div>
 			</div>
 		</div>
 		<div class="ui hidden divider"></div>
 		<div class="row">
-			<div class="ui grid">
-				<div class="five wide column"
-					style="height: 80%; margin-left: 30px;">
-					<div
-						style="height: 40%; background-color: #ffffff; margin-top: -13px;">
-						<h4 style="margin-left:10px;">Total Transactions</h4>
-						<div class="ui clearing divider"></div>
-						<span id="total"
-							style="display: block; margin-left: 35%; padding-top: 10%; font-size: 72px; font-weight: 700; line-height: 72px;"></span>
-					</div>
-					<div
-						style="height: 63%; background-color: #ffffff; margin-top: 15px;">
-						<h4 style="margin-left:10px;">Current No of Transactions  </h4>
-						<div class="ui clearing divider" style="height:10%;"></div>
-						<div id="gauge"></div>
-					</div>
+			<div class="ui internally celled grid">
+				<div class="four wide column"
+					style="height: 50%; background-color: #ffffff;">
+					<h4 style="margin-left: 10px;">Total Transactions</h4>
+					<div class="ui clearing divider" style="height:35%"></div>
+					<span id="total"
+						style="display: block; margin-left: 35%; font-size: 72px; font-weight: 700; line-height: 72px;"></span>
 				</div>
-				<div class="ten wide column"
-					style="background-color: #ffffff; height: 80%; margin-right: 10px;">
-					<h4>Histogram</h4>
+				<div class="four wide column"
+					style="height: 50%; background-color: #ffffff;">
+					<h4 style="margin-left: 10px;">Current No of Transactions</h4>
+					<div class="ui clearing divider" style="height:15%;"></div>
+					<div id="gauge"></div>
+				</div>
+				<div class="eight wide column"
+					style="background-color: #ffffff; height: 50%;">
+					<h4>No of Transactions over time</h4>
 					<div class="ui clearing divider"></div>
 					<div id="bar" style="height: 90%;"></div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="ui clearing divider"></div>
+	<div style="background-color: #ffffff;">
+		<h4 style="margin-left: 10px;">No of Sucess, Failure Transactions
+			over time</h4>
+		<div class="ui clearing divider"></div>
+		<div id="line"></div>
+	</div>
+	<div class="ui hidden divider"></div>
 </body>
 </html>
