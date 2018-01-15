@@ -1,17 +1,16 @@
-var barWs;
 var metricWs;
-var gaugeWs;
+var requestCountWs;
+var successFailureWs;
 var lineWs;
 
-var barAxisData = [];
-var barData = [ 30, 200, 100, 400, 150, 250 ];
-var gaugeData = [ 91.4 ];
+var successFailureData = [ 30, 200, 100, 400, 150, 250 ];
+var requestCountData = [ [ 'data1', 30 ], [ 'data2', 120 ], ];
 var lineData = [ [ 300, 350, 300, 0, 0, 0 ], [ 130, 100, 140, 200, 150, 50 ] ];
 var lineAxisData;
 
 total();
-drawGaugeChart();
-drawBarChart();
+drawrequestCountChart();
+drawsuccessFailureChart();
 drawLineChart();
 
 function total() {
@@ -34,101 +33,76 @@ function total() {
 	};
 }
 
-function drawGaugeChart() {
-
-	gaugeData.unshift('data');
+function drawrequestCountChart() {
 
 	var chart = c3.generate({
-		bindto : '#gauge',
+		bindto : '#requestCount',
 		data : {
-			columns : [ gaugeData ],
-			type : 'gauge'
+			columns : requestCountData,
+			type : 'pie'
 		},
-		gauge : {
-			label : {
-				format : function(value, ratio) {
-					return value;
-				},
-				show : false
-			},
+		legend : {
+			position : 'right'
 		}
 	});
 
-	if (gaugeWs == undefined || gaugeWs.readyState == WebSocket.CLOSED) {
+	if (requestCountWs == undefined
+			|| requestCountWs.readyState == WebSocket.CLOSED) {
 		if (location.protocol == "http:")
-			gaugeWs = new WebSocket("ws://" + location.host
+			requestCountWs = new WebSocket("ws://" + location.host
 					+ "/dashboard/tansactionsStream");
 		else if (location.protocol == "https:")
-			gaugeWs = new WebSocket("wss://" + location.host
+			requestCountWs = new WebSocket("wss://" + location.host
 					+ "/dashboard/tansactionsStream");
 	}
 
-	gaugeWs.onopen = function() {
-		gaugeWs.send("gauge");
+	requestCountWs.onopen = function() {
+		requestCountWs.send("requestCount");
 	};
 
-	gaugeWs.onmessage = function(msg) {
-		gaugeData.shift();
-		gaugeData.shift();
-		gaugeData.push(JSON.parse(msg.data).value);
-		gaugeData.unshift('data');
+	requestCountWs.onmessage = function(msg) {
+
+		requestCountData = JSON.parse(msg.data);
 
 		chart.load({
-			columns : [ gaugeData ]
+			columns : requestCountData
 		});
 	};
 }
 
-function drawBarChart() {
-
-	while (barData.length < 60) {
-		barData.push(0);
-		/* barAxisData.push(new Date().getTime()); */
-	}
-
-	// barAxisData.unshift('x');
-	barData.unshift('count');
+function drawsuccessFailureChart() {
 
 	var chart = c3.generate({
-		bindto : '#bar',
+		bindto : '#sucessFailure',
 		data : {
-			columns : [ [ barData ] ],
-			type : 'bar'
+			columns : successFailureData,
+			type : 'pie'
+		},
+		legend : {
+			position : 'right'
 		}
 	});
 
-	chart.load({
-		columns : [ barData ]
-	});
-
-	if (barWs == undefined || barWs.readyState == WebSocket.CLOSED) {
+	if (successFailureWs == undefined
+			|| successFailureWs.readyState == WebSocket.CLOSED) {
 		if (location.protocol == "http:")
-			barWs = new WebSocket("ws://" + location.host
+			successFailureWs = new WebSocket("ws://" + location.host
 					+ "/dashboard/tansactionsStream");
 		else if (location.protocol == "https:")
-			barWs = new WebSocket("wss://" + location.host
+			successFailureWs = new WebSocket("wss://" + location.host
 					+ "/dashboard/tansactionsStream");
 	}
 
-	barWs.onopen = function() {
-		barWs.send("bar");
+	successFailureWs.onopen = function() {
+		successFailureWs.send("successFailure");
 	};
 
-	barWs.onmessage = function(msg) {
+	successFailureWs.onmessage = function(msg) {
 
-		barData.push(JSON.parse(msg.data).value);
+		successFailureData = JSON.parse(msg.data);
 
-		if (barData.length > 61) {
-			barData.shift();
-			barData.shift();
-			barData.unshift('count');
-			/*
-			 * barAxisData.shift(); barAxisData.shift();
-			 * barAxisData.unshift('x');
-			 */
-		}
 		chart.load({
-			columns : [ barData ]
+			columns : successFailureData
 		});
 	};
 }
@@ -148,14 +122,14 @@ function drawLineChart() {
 	lineData[1].unshift('failure');
 
 	var chart = c3.generate({
-		bindto: '#line',
-	    data: {
-	        columns: lineData,
-	        types: {
-	            success: 'area',
-	            failure: 'area'
-	        }
-	    }
+		bindto : '#line',
+		data : {
+			columns : lineData,
+			types : {
+				success : 'area',
+				failure : 'area'
+			}
+		}
 	});
 
 	if (lineWs == undefined || lineWs.readyState == WebSocket.CLOSED) {

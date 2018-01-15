@@ -19,7 +19,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 
 @ServerEndpoint("/tansactionsStream")
-public class TranactionsBased {
+public class TransactionsBased {
 
 	private static final Set<Session> sessionList = Collections.synchronizedSet(new HashSet<Session>());
 	private Session session;
@@ -53,18 +53,33 @@ public class TranactionsBased {
 
 		public void run() {
 			try {
-				if (chart.equals("bar")) {
-					msg = new JSONObject();
-					msg.put("value", String.valueOf((Math.round(Math.random() * 100) / 1)));
+				if (chart.equals("successFailure")) {
+					JSONArray data = new JSONArray();
 
-					session.getBasicRemote().sendText(msg.toString());
+					JSONArray tmpData = new JSONArray();
+					tmpData.add("success");
+					tmpData.add(Math.round(Math.random() * 10) / 1);
+					data.add(tmpData);
+
+					tmpData = new JSONArray();
+					tmpData.add("failure");
+					tmpData.add(Math.round(Math.random() * 10) / 1);
+					data.add(tmpData);
+
+					session.getBasicRemote().sendText(data.toString());
 				} else if (chart.equals("total")) {
 					session.getBasicRemote().sendText(String.valueOf(Math.round((Math.random() * 100))));
-				} else if (chart.equals("gauge")) {
-					msg = new JSONObject();
-					msg.put("value", String.valueOf((Math.round(Math.random() * 10) / 1)));
+				} else if (chart.equals("requestCount")) {
 
-					session.getBasicRemote().sendText(msg.toString());
+					JSONArray data = new JSONArray();
+					for (int i = 1; i <= 5; i++) {
+						JSONArray tmpData = new JSONArray();
+						tmpData.add("data" + i);
+						tmpData.add(Math.round(Math.random() * 10) / 1);
+						data.add(tmpData);
+					}
+
+					session.getBasicRemote().sendText(data.toString());
 				} else if (chart.equals("line")) {
 					msg = new JSONObject();
 					msg.put("y", String.valueOf((Math.round(Math.random() * 10) / 1)));

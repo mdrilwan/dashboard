@@ -1,10 +1,9 @@
 var avgWs;
 var donutWs;
-var barWs;
+var horizontalBarWs;
 
 var barAxisData = [];
-var barData = [
-		[ 'x', 'data1', 'data2' ], [ 'count', 300, 400 ] ];
+var horizontalBarData = [ [ 'x', 'data1', 'data2' ], [ 'count', 300, 400 ] ];
 var donutData = [ [ 'less than 2s', 30 ], [ 'between 2s and 5s', 120 ],
 		[ 'more than 5s', 20 ] ];
 
@@ -59,12 +58,11 @@ function drawDonutChart() {
 	};
 
 	donutWs.onmessage = function(msg) {
-		donutData[0].shift();
-		donutData[0].shift();
-		donutData[1].shift();
-		donutData[1].shift();
-		donutData[2].shift();
-		donutData[2].shift();
+
+		for(var i=0;i<donutData.length;i++) {
+			for(var j=0;j<donutData[i].length;j++)
+				donutData[i].shift();
+		}
 
 		donutData[0].push(JSON.parse(msg.data).less.value);
 		donutData[1].push(JSON.parse(msg.data).between.value);
@@ -86,49 +84,59 @@ function drawBarChart() {
 		bindto : '#horizontalbar',
 		data : {
 			x : 'x',
-			columns : barData,
-			type : 'bar'
+			columns : horizontalBarData,
+			type : 'bar',
+			axes : {
+				count : 'y2'
+			}
+		},
+		legend : {
+			position : 'right'
 		},
 		axis : {
 			rotated : true,
 			x : {
 				type : 'category'
+			},
+			y : {
+				show : false
+			},
+			y2 : {
+				show : true
 			}
 		}
 	});
 
-	if (barWs == undefined || barWs.readyState == WebSocket.CLOSED) {
+	if (horizontalBarWs == undefined
+			|| horizontalBarWs.readyState == WebSocket.CLOSED) {
 		if (location.protocol == "http:")
-			barWs = new WebSocket("ws://" + location.host
+			horizontalBarWs = new WebSocket("ws://" + location.host
 					+ "/dashboard/performanceStream");
 		else if (location.protocol == "https:")
-			barWs = new WebSocket("wss://" + location.host
+			horizontalBarWs = new WebSocket("wss://" + location.host
 					+ "/dashboard/performanceStream");
 	}
 
-	barWs.onopen = function() {
-		barWs.send("horizontalbar");
+	horizontalBarWs.onopen = function() {
+		horizontalBarWs.send("horizontalbar");
 	};
 
-	barWs.onmessage = function(msg) {
+	horizontalBarWs.onmessage = function(msg) {
 
-		for(var i=0;i<barData[1].length;i++)
-			barData[1].shift();
+		horizontalBarData[1] = [];
+		horizontalBarData[0] = [];
 
-		for(var i=0;i<barData[0].length;i++)
-			barData[0].shift();
+		for (var i = 1; i <= 10; i++) {
 
-		for(var i=1;i<=10;i++) {
-			var key = "data" + i;
-			barData[1].push(JSON.parse(msg.data)[i-1].value);
-			barData[0].push(JSON.parse(msg.data)[i-1].x);
+			horizontalBarData[1].push(JSON.parse(msg.data)[i - 1].value);
+			horizontalBarData[0].push(JSON.parse(msg.data)[i - 1].x);
 		}
 
-		barData[1].unshift('count');
-		barData[0].unshift('x');
+		horizontalBarData[1].unshift('count');
+		horizontalBarData[0].unshift('x');
 
 		chart.load({
-			columns : barData
+			columns : horizontalBarData
 		});
 	};
 

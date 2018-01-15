@@ -10,6 +10,7 @@ function loadTraffic() {
 
 	$("#main").empty();
 	$("#main").load("traffic.html");
+	$('body').css('background-color', '#f2f2f2');
 }
 
 function loadPerformance() {
@@ -20,6 +21,7 @@ function loadPerformance() {
 
 	$("#main").empty();
 	$("#main").load("performance.html");
+	$('body').css('background-color', '#f2f2f2');
 }
 
 function loadError() {
@@ -30,6 +32,7 @@ function loadError() {
 
 	$("#main").empty();
 	$("#main").load("error.html");
+	$('body').css('background-color', '#f2f2f2');
 }
 
 function home() {
@@ -38,4 +41,5 @@ function home() {
 			"<a class=\"active section\" onclick=\"home()\">Home</a>");
 	$("#main").empty();
 	$("#main").load("home.html");
+	$('body').css('background-color', '#ffffff');
 }

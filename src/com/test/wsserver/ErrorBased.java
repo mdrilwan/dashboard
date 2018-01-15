@@ -15,11 +15,11 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
-import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
-@ServerEndpoint("/performanceStream")
-public class PerformanceBased {
+@ServerEndpoint("/errorStream")
+public class ErrorBased {
 
 	private static final Set<Session> sessionList = Collections.synchronizedSet(new HashSet<Session>());
 	private Session session;
@@ -53,37 +53,43 @@ public class PerformanceBased {
 
 		public void run() {
 			try {
-				if (chart.equals("horizontalbar")) {
-					JSONArray tmp = new JSONArray();
-
-					for (int i = 1; i <= 10; i++) {
-						msg = new JSONObject();
-						msg.put("x", "data" + i);
-						msg.put("value", String.valueOf((Math.round(Math.random() * 100) / 1)));
-						tmp.add(msg);
-					}
-
-					session.getBasicRemote().sendText(tmp.toString());
-
-				} else if (chart.equals("avg")) {
+				if (chart.equals("errorPercent")) {
 
 					session.getBasicRemote().sendText(String.valueOf(Math.round((Math.random() * 100))));
 
-				} else if (chart.equals("donut")) {
-					msg = new JSONObject();
-					msg.put("value", String.valueOf((Math.round(Math.random() * 10) / 1)));
-					JSONObject tmp = new JSONObject();
-					tmp.put("less", msg);
+				} else if (chart.equals("reqError")) {
 
 					msg = new JSONObject();
-					msg.put("value", String.valueOf((Math.round(Math.random() * 10) / 1)));
-					tmp.put("between", msg);
+					JSONArray data = new JSONArray();
+					JSONArray keys = new JSONArray();
 
-					msg = new JSONObject();
-					msg.put("value", String.valueOf((Math.round(Math.random() * 10) / 1)));
-					tmp.put("more", msg);
+					for (int i = 1; i <= 5; i++) {
 
-					session.getBasicRemote().sendText(tmp.toString());
+						JSONArray tmp = new JSONArray();
+						tmp.add((Math.round(Math.random() * 10) / 1));
+						data.add(tmp);
+
+						keys.add("data" + i);
+					}
+
+					msg.put("data", data);
+					msg.put("keys", keys);
+
+					session.getBasicRemote().sendText(msg.toString());
+
+				} else if (chart.equals("locError")) {
+
+					JSONArray data = new JSONArray();
+
+					for (int i = 1; i <= 5; i++) {
+
+						JSONArray tmp = new JSONArray();
+						tmp.add("data" + i);
+						tmp.add((Math.round(Math.random() * 100) / 1));
+						data.add(tmp);
+					}
+
+					session.getBasicRemote().sendText(data.toString());
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

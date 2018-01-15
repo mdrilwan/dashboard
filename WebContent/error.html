@@ -3,34 +3,40 @@
 <script src="js/error.js"></script>
 </head>
 <body>
-	<div class="ui container" style="padding-right: 100px;">
-		<div id="buttonElement">
-			<div align="right">
-				<button class="ui primary button">Live Data</button>
-				<button class="ui primary button">Minute</button>
-				<button class="ui primary button">Hour</button>
-				<button class="ui primary button">Day</button>
+	<div id="errors" class="ui container" style="width: 100%;">
+		<div id="buttonElement" align="center">
+			<div class="ui basic buttons" style="background-color: #ffffff;">
+				<div class="ui button">Minute</div>
+				<div class="ui button">Hour</div>
+				<div class="ui button">Day</div>
+				<div class="ui button">Month</div>
 			</div>
 		</div>
 		<div class="ui hidden divider"></div>
-		<div id="chart" style="padding-right: 20px;">
-			<div class="row" style="height: 35%;">
-				<h4 align="center">Chart 1</h4>
-				<div class="ui grid">
+		<div class="row">
+			<div class="ui internally celled grid">
+				<div class="four wide column"
+					style="background-color: #ffffff; height: 50%;">
+					<h4>Error Percentage</h4>
+					<div class="ui clearing divider"></div>
+					<div id="errorPercent" style="height: 75%;"></div>
 				</div>
-			</div>
-			<div class="ui hidden divider"></div>
-			<div class="row" style="height: 35%;">
-				<div class="ui grid">
-					<div class="eight wide column">
-						<h4 align="center">Chart 2</h4>
-					</div>
-					<div class="eight wide column">
-						<h4 align="center">Chart 3</h4>
-					</div>
+				<div class="twelve wide column"
+					style="background-color: #ffffff; height: 50%;">
+					<h4>Erraneous Requests</h4>
+					<div class="ui clearing divider"></div>
+					<div id="reqError" style="height: 80%;"></div>
 				</div>
 			</div>
 		</div>
+		<div class="ui hidden divider"></div>
+				<div class="ui clearing divider"></div>
+		<div style="background-color: #ffffff;">
+			<h4 style="margin-left: 10px;">Error Stats by Clients</h4>
+			<div class="ui clearing divider"></div>
+			<div id="locationErrorRatio"></div>
+		</div>
+		<div class="ui hidden divider"></div>
 	</div>
 </body>
 </html>
