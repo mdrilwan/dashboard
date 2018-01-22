@@ -5,7 +5,7 @@ var lineWs;
 
 var successFailureData = [ 30, 200, 100, 400, 150, 250 ];
 var requestCountData = [ [ 'data1', 30 ], [ 'data2', 120 ], ];
-var lineData = [ [ 300, 350, 300, 0, 0, 0 ], [ 130, 100, 140, 200, 150, 50 ] ];
+var lineData = [ [ ], [ ] ];
 var lineAxisData;
 
 total();
@@ -110,13 +110,13 @@ function drawsuccessFailureChart() {
 function drawLineChart() {
 
 	while (lineData[0].length < 60) {
-		lineData[0].push(0);
+		lineData[0].push(null);
 		/* lineAxisData[0].push(new Date().getTime()); */
 	}
 	lineData[0].unshift('success');
 
 	while (lineData[1].length < 60) {
-		lineData[1].push(0);
+		lineData[1].push(null);
 		/* lineAxisData[1].push(new Date().getTime()); */
 	}
 	lineData[1].unshift('failure');
