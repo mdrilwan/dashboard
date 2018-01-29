@@ -102,7 +102,9 @@ function drawlocError() {
 	var chart = c3.generate({
 		bindto : '#locationErrorRatio',
 		data : {
-			columns : locErrorData
+			columns : locErrorData,
+			type : 'bar',
+			groups : [['data1', 'data2']]
 		},
 		legend : {
 			position : 'right'
@@ -124,6 +126,7 @@ function drawlocError() {
 
 	locErrorWs.onmessage = function(msg) {
 		var receivedData = JSON.parse(msg.data);
+		var groups = [];
 
 		for (var i = 0; i < receivedData.length; i++) {
 			if (!locErrorData[i])
@@ -139,10 +142,11 @@ function drawlocError() {
 				}
 			}
 			locErrorData[i].unshift(receivedData[i][0]);
+			groups.push(receivedData[i][0]);
 		}
-
 		chart.load({
 			columns : locErrorData
 		});
+		chart.groups([ groups ]);
 	};
 }
