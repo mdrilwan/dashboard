@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$('.ui.sidebar').sidebar('show');
+	$('.ui.accordion').accordion();
 	home();
 });
 
@@ -11,8 +11,8 @@ function loadTraffic() {
 
 	$("#main").empty();
 	$("#main").load("traffic.html");
-	//$('body').css('background-color', '#f2f2f2');
-	//$('#buttonElement').show();
+	// $('body').css('background-color', '#f2f2f2');
+	// $('#buttonElement').show();
 }
 
 function loadPerformance() {
@@ -23,8 +23,8 @@ function loadPerformance() {
 
 	$("#main").empty();
 	$("#main").load("performance.html");
-	//$('body').css('background-color', '#f2f2f2');
-	//$('#buttonElement').show();
+	// $('body').css('background-color', '#f2f2f2');
+	// $('#buttonElement').show();
 }
 
 function loadError() {
@@ -35,8 +35,8 @@ function loadError() {
 
 	$("#main").empty();
 	$("#main").load("error.html");
-	//$('body').css('background-color', '#f2f2f2');
-	//$('#buttonElement').show();
+	// $('body').css('background-color', '#f2f2f2');
+	// $('#buttonElement').show();
 }
 
 function home() {
@@ -45,6 +45,6 @@ function home() {
 			"<a class=\"active section\" onclick=\"home()\">Home</a>");
 	$("#main").empty();
 	$("#main").load("home.html");
-	//$('body').css('background-color', '#ffffff');
-	//$('#buttonElement').hide();
+	// $('body').css('background-color', '#ffffff');
+	// $('#buttonElement').hide();
 }
