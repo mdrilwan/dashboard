@@ -67,8 +67,6 @@ public class TransactionsBased {
 					data.add(tmpData);
 
 					session.getBasicRemote().sendText(data.toString());
-				} else if (chart.equals("total")) {
-					session.getBasicRemote().sendText(String.valueOf(Math.round((Math.random() * 100))));
 				} else if (chart.equals("requestCount")) {
 
 					JSONArray data = new JSONArray();

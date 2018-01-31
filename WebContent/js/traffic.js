@@ -1,37 +1,15 @@
-var metricWs;
 var requestCountWs;
 var successFailureWs;
 var lineWs;
 
 var successFailureData = [ 30, 200, 100, 400, 150, 250 ];
-var requestCountData = [ [ 'data1', 30 ], [ 'data2', 120 ], ];
+var requestCountData = [ [ 'data1', 30 ], [ 'data2', 120 ] ];
 var lineData = [ [ ], [ ] ];
 var lineAxisData;
 
-total();
 drawrequestCountChart();
 drawsuccessFailureChart();
 drawLineChart();
-
-function total() {
-
-	if (metricWs == undefined || metricWs.readyState == WebSocket.CLOSED) {
-		if (location.protocol == "http:")
-			metricWs = new WebSocket("ws://" + location.host
-					+ "/dashboard/tansactionsStream");
-		else if (location.protocol == "https:")
-			metricWs = new WebSocket("wss://" + location.host
-					+ "/dashboard/tansactionsStream");
-	}
-
-	metricWs.onopen = function() {
-		metricWs.send("total");
-	};
-
-	metricWs.onmessage = function(msg) {
-		$('#total').text(msg.data);
-	};
-}
 
 function drawrequestCountChart() {
 
