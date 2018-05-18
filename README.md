@@ -6,10 +6,10 @@ Currently the dashboard is updated with dummy data. Integrating with actual data
 
 
 
-Follow the below steps to set up the project
+Follow the below steps to set up the project : 
 
-Clone the project.
+ - Clone the project.
 
-Download the dependencies. (Maven dependencies will be included later)
+ - Download the dependencies. (Maven dependencies will be included later)
 
-Build the war file and start it.
+ - Build the war file and start it.
