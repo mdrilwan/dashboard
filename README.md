@@ -2,14 +2,12 @@
 
 This is an example implementation of real time dashboard using c3.js, websockets.
 
-Currently the dashboard is updated with dummy data. Integrating with actual data is still in progress.
+Note : Currently the dashboard is updated with dummy data. Integrating with actual data is still in progress.
 
+You can build the application by using below steps,
+git clone https://github.com/mdrilwan/dashboard.git
+git checkout dashboard
+gradle clean
+gradle war
 
-
-Follow the below steps to set up the project : 
-
- - Clone the project.
-
- - Download the dependencies. (Maven dependencies will be included later)
-
- - Build the war file and start it.
+dashboard.war file can be found in the path build/libs folder.
