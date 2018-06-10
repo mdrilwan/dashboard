@@ -10,4 +10,4 @@ git checkout dashboard
 gradle clean
 gradle war
 
-dashboard.war file will be available in the path build/libs folder.
+dashboard.war file can be found in the path build/libs folder.
