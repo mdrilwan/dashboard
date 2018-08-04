@@ -17,4 +17,3 @@ gradle war
 dashboard.war file can be found in the path build/libs folder.
 
 For details, visit http://rilwan.in/real-time-dashboards-with-websockets-and-c3-js/
-
