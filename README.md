@@ -7,8 +7,6 @@ You can build the application by using below steps,
 
 git clone https://github.com/mdrilwan/dashboard.git
 
-git checkout dashboard
-
 gradle clean
 
 gradle war
