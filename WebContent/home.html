@@ -1,35 +1,30 @@
 <html>
+<head>
+<script src="js/home.js"></script>
+</head>
 <body>
-	<div id="home">
-		<div class="ui hidden divider" style="height: 5%;"></div>
-		<div class="row">
-			<div class="ui grid">
-				<div class="one wide column"></div>
-				<div class="three wide column" onclick="loadTraffic()">
-					<img style="margin-left:70px;" src="images/traffic.png" width="100"></img>
-					<h3 style="text-align:center">Transactions</h3>
+	<div id="home" style="height: 100%; width: 100%;">
+		<div class="row" style="height: 45%;">
+			<div class="ui internally celled grid" style="height: 100%;">
+				<div class="six wide column">
+					<h4 style="margin-left: 10px;">Total Transactions</h4>
+					<div class="ui hidden divider" style="height: 30%;"></div>
+					<span id="total"
+						style="display: block; margin-left: 35%; font-size: 72px; font-weight: 700; line-height: 72px;"></span>
 				</div>
-				<div class="two wide column"></div>
-				<div class="three wide column" onclick="loadPerformance()">
-					<img style="margin-left:70px;" src="images/performance.png" width="100"></img>
-					<h3 style="text-align:center">Performance</h3>
-				</div>
-				<div class="two wide column"></div>
-				<div class="three wide column" onclick="loadError()">
-					<img style="margin-left:70px;" src="images/error.png" width="100"></img>
-					<h3 style="text-align:center">Error Percent</h3>
+				<div class="ten wide column">
+					<h4 style="margin-left: 10px;">Top Clients</h4>
+					<div class="ui hidden divider"></div>
+					<div id="client" style="height: 80%;"></div>
 				</div>
 			</div>
 		</div>
-		<div class="ui hidden divider" style="height: 10%;"></div>
-		<div class="row">
-			<div class="ui grid">
-				<div class="one wide column"></div>
-				<div class="three wide column" onclick="loadLocation()">
-					<img style="margin-left:70px;" src="images/location.png" width="100"></img>
-					<h3 style="text-align:center">Geo Location</h3>
-				</div>
-			</div>
+		<div class="ui clearing divider"
+			style="width: 100%; margin-left: 0px; margin-right: 0px;"></div>
+		<div class="row" style="height: 45%;">
+			<h4 style="margin-left: 10px;">No of Transactions over time</h4>
+			<div class="ui hidden divider"></div>
+			<div id="totalOverview" style="height: 90%;"></div>
 		</div>
 	</div>
 </body>

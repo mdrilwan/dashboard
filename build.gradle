@@ -1,0 +1,50 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+ext.artifactMajorVersion = ''
+ext.artifactBuildNumber = ''
+
+// tag::repositories[]
+repositories {
+    //mavenCentral()
+    maven { url "http://jcenter.bintray.com" }
+}
+// end::repositories[]
+
+sourceSets {
+    main {
+        java {
+			srcDirs = ['src']
+		}
+	}
+}
+
+war {
+	// War file name
+	archiveName 'dashboard.war'
+}
+
+// Web directory, this overrides the default value "webapp"
+project.webAppDirName = 'WebContent'
+
+// tag::dependencies[]
+dependencies {
+
+	// https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+	compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
+	// https://mvnrepository.com/artifact/javax.websocket/javax.websocket-client-api
+	compile group: 'javax.websocket', name: 'javax.websocket-client-api', version: '1.1'
+
+	// https://mvnrepository.com/artifact/javax.websocket/javax.websocket-client-api
+	compile group: 'javax.websocket', name: 'javax.websocket-api', version: '1.1'
+
+
+
+
+}
+// end::dependencies[]
